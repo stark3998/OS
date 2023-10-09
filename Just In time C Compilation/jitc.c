@@ -67,7 +67,11 @@ struct jitc *jitc_open(const char *path_name)
   return shared_object;
 }
 
-void jitc_close(struct jitc *jitc) { dlclose(jitc->handle); }
+void jitc_close(struct jitc *jitc)
+{
+  dlclose(jitc->handle);
+  FREE(shared_object);
+}
 
 long jitc_lookup(struct jitc *jitc, const char *symbol)
 {
